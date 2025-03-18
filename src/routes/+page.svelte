@@ -12,123 +12,41 @@
 		}
 	}
 </script>
+<div class="p-6 bg-gray-100 min-h-screen">
+    <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
+        {#if data.user}
+            <p class="text-lg font-semibold text-gray-700">Welcome back, {data.user.username}</p>
+            <form action="/logout?/logout" method="POST" class="mt-4">
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Logout</button>
+            </form>
+            <form action="/logout?/deleteAccount" method="POST" class="mt-2">
+                <button type="submit" class="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600">Delete Account</button>
+            </form>
+        {:else}
+            <p class="text-gray-600">You are not logged in.</p>
+            <p class="mt-4">
+                <a href="/login" class="text-blue-500 hover:underline">Login</a>
+                or
+                <a href="/register" class="text-blue-500 hover:underline">Register</a>
+            </p>
+        {/if}
+    </div>
 
-<div class="div1">
-	{#if data.user}
-		<p>Welcome back, {data.user.username}</p>
-		<form action="/logout?/logout" method="POST">
-			<button type="submit">Logout</button>
-		</form>
-		<form action="/logout?/deleteAccount" method="POST">
-			<button type="submit">Delete Account</button>
-		</form>
-	{:else}
-		<p>You are not logged in.</p>
+    <div class="mt-8 max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        <h1 class="text-2xl font-bold text-gray-800">My Event App</h1>
+        <p class="text-gray-600 mt-2">Here are the current events.</p>
 
-		<p>
-			<a href="/login">Login</a>
-			or
-			<a href="/register">Register</a>
-		</p>
-	{/if}
+        <select id="category" bind:value={selectedCategorie} onchange={filterEvents} class="mt-4 w-full border-gray-300 rounded-lg p-2">
+            <option value="all">All</option>
+            {#each data.categories as category}
+                <option value={category}>{category.name}</option>
+            {/each}
+        </select>
+
+        <div class="mt-4 space-y-2">
+            {#each filteredEvents as event (event.id)}
+                <p class="p-2 bg-gray-100 rounded-lg animate-fade-in">{event.id} - {event.title} - {new Date(event.start_date).toDateString()}</p>
+            {/each}
+        </div>
+    </div>
 </div>
-
-<div class="body">
-	<div class="container">
-		<h1>My Event App</h1>
-
-		<p>Here are the current events.</p>
-
-		<select name="" id="" bind:value={selectedCategorie} onchange={filterEvents}>
-			<option value="all">All</option>
-			{#each data.categories as category}
-				<option value={category}>{category.name}</option>
-			{/each}
-		</select>
-
-		{#each filteredEvents as event (event.id)}
-			<p animate:flip>{event.id} - {event.title} - {new Date(event.start_date).toDateString()}</p>
-		{/each}
-	</div>
-</div>
-
-<style>
-	.body {
-		width: 100%;
-		height: 100vh;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background-color: rgb(177, 233, 233);
-		animation: 10s change infinite;
-	}
-
-	.container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		margin: 200px;
-		background-color: rgb(46, 97, 97);
-		width: 70%;
-		box-shadow: 20px 40px 60px rgba(0, 0, 0, 0.5);
-		transition: 0.7s;
-		animation: scale 2.5s ease-in-out infinite;
-	}
-
-	@keyframes scale {
-		0% {
-			transform: scale(1);
-		}
-		50% {
-			transform: scale(0.9);
-		}
-		100% {
-			transform: scale(1);
-		}
-	}
-
-	.container:hover {
-		transform: scale(1.1);
-		transition: 0.7s;
-	}
-
-	.container h1 {
-		color: white;
-		font-size: 50px;
-		font-family: Arial, Helvetica, sans-serif;
-	}
-
-	.container p {
-		color: white;
-		font-size: 20px;
-		margin: 20px;
-		font-family: 'Courier New', Courier, monospace;
-	}
-
-	.div1 {
-		height: 120px;
-		background-color: rgb(46, 97, 97);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-	}
-	.div1 p {
-		color: white;
-		font-family: 'Courier New', Courier, monospace;
-		text-transform: capitalize;
-		font-size: 20px;
-	}
-
-	.div1 button {
-		height: 30px;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-		cursor: pointer;
-		transition: 0.7s;
-	}
-	.div1 button:hover {
-		transform: scale(1.1);
-		transition: 0.7s;
-	}
-</style>

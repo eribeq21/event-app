@@ -3,33 +3,20 @@
 	import Warning from '$lib/components/Warning.svelte';
 	export let form;
 </script>
-
-<div>
-	<form action="?/login" method="POST" use:enhance>
-		<label for="eamil">E-Mail</label>
-		<input type="text" name="email" id="email" required />
-
-		<label for="password">Password</label>
-		<input type="password" name="password" id="password" required />
-
-		<button type="submit">Login</button>
-
-		{#if form}
-			<Warning message={form.message} />
-		{/if}
-	</form>
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <form action="?/login" method="POST" use:enhance class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">Login</h1>
+        
+        <label for="email" class="block text-gray-700">E-Mail</label>
+        <input type="text" name="email" id="email" required class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4" />
+        
+        <label for="password" class="block text-gray-700">Password</label>
+        <input type="password" name="password" id="password" required class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4" />
+        
+        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">Login</button>
+        
+        {#if form}
+            <Warning message={form.message} />
+        {/if}
+    </form>
 </div>
-
-<style>
-	div {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100vh;
-	}
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-</style>
