@@ -5,105 +5,32 @@
 	let { data, form } = $props();
 </script>
 
-<div class="final">
-	<div class="container">
-		<h1>Locations</h1>
-
-		<a href="/admin/locations/new">Write a new location</a>
+<div class="p-6 bg-white rounded-lg shadow-md">
+	<div class="container text-center mb-6">
+		<h1 class="text-2xl font-bold text-gray-800">Locations</h1>
+		<a href="/admin/locations/new" class="text-blue-600 hover:underline">Write a new location</a>
 	</div>
 
-	<div class="con2">
+	<div class="space-y-4">
 		{#if form && !form.success}
 			<Warning message={form.message} />
 		{/if}
 
 		{#each data.locations as locations (locations.id)}
-			<div class="box" transition:slide>
-				<p>{locations.id} - {locations.name}</p>
-
-				<form action="?/deleteLocation" method="POST" use:enhance>
+			<div
+				class="p-4 bg-gray-100 rounded-md shadow-sm flex justify-between items-center"
+				transition:slide
+			>
+				<p class="text-gray-700">{locations.id} - {locations.name}</p>
+				<form action="?/deleteLocation" method="POST" use:enhance class="ml-4">
 					<input type="hidden" name="id" value={locations.id} />
-					<button type="submit">Delete</button>
+					<button
+						type="submit"
+						class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-md shadow-sm"
+						>Delete</button
+					>
 				</form>
 			</div>
 		{/each}
 	</div>
 </div>
-
-<style>
-	.box {
-		border: 1px solid #000000;
-		padding: 1rem;
-		margin: 1rem 0;
-		padding: 10px;
-		margin: 20px;
-		box-shadow: 5px 2px 5px black;
-	}
-
-	.container a {
-		text-decoration: none;
-		color: rgb(41, 105, 120);
-		animation: bigger 5s infinite;
-	}
-
-	@keyframes bigger {
-		0% {
-			transform: scale(1.1);
-			transition: 0.7s;
-		}
-		25% {
-			transform: scale(1.2);
-			transition: 0.7s;
-		}
-		50% {
-			transform: scale(1.3);
-			transition: 0.7s;
-		}
-		75% {
-			transform: scale(1.2);
-			transition: 0.7s;
-		}
-		100% {
-			transform: scale(1.1);
-			transition: 0.7s;
-		}
-	}
-
-	.container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		height: 200px;
-		padding: 10px;
-		margin: 10px;
-	}
-
-	.container h1 {
-		color: black;
-		font-size: 50px;
-		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	}
-
-	.final {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		margin: 40px;
-		border: 1px solid black;
-	}
-
-	.con2 {
-		width: 100%;
-	}
-
-	.con2 .box button {
-		background-color: red;
-		color: white;
-		border: 0px;
-		height: 20px;
-		text-align: center;
-		cursor: pointer;
-	}
-</style>

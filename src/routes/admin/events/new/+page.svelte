@@ -2,47 +2,75 @@
 	import { enhance } from '$app/forms';
 	let { data } = $props();
 </script>
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-4 text-gray-800">Create a new event</h1>
 
-<h1>Create a new event</h1>
+    <form method="POST" action="?/createEvent" use:enhance class="space-y-4">
+        <div>
+            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+            <input type="text" placeholder="Title" name="title"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+        </div>
 
-<div class="container">
-	<form method="POST" action="?/createEvent" use:enhance>
-		<label class="label1" for="title">Title</label>
-		<input type="text" placeholder="Title" name="title" />
+        <div>
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea placeholder="Description" name="description"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 h-24"></textarea>
+        </div>
 
-		<label class="label2" for="description">Description</label>
-		<textarea placeholder="Description" name="description"></textarea>
+        <div>
+            <label for="url" class="block text-sm font-medium text-gray-700">URL</label>
+            <input type="text" placeholder="URL" name="url"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+        </div>
 
-		<label for="url">URL</label>
-		<input type="text" placeholder="URL" name="url" />
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="startDate" class="block text-sm font-medium text-gray-700">Start Date</label>
+                <input type="date" name="startDate"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+            </div>
+            <div>
+                <label for="endDate" class="block text-sm font-medium text-gray-700">End Date</label>
+                <input type="date" name="endDate"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+            </div>
+        </div>
 
-		<label for="startDate">Start Date</label>
-		<input type="date" name="startDate" />
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label for="startTime" class="block text-sm font-medium text-gray-700">Start Time</label>
+                <input type="time" name="startTime"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+            </div>
+        </div>
 
-		<label for="endDate">End Date</label>
-		<input type="date" name="endDate" />
+        <div>
+            <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+            <select name="locationId"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                {#each data.locations as location (location.id)}
+                    <option value={location.id}>{location.name}</option>
+                {/each}
+            </select>
+        </div>
 
-		<label for="startTime">Start Time</label>
-		<input type="time" name="startTime" />
+        <div>
+            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+            <select name="categoryId"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                {#each data.categories as categorie (categorie.id)}
+                    <option value={categorie.id}>{categorie.name}</option>
+                {/each}
+            </select>
+        </div>
 
-		<label for="location">Location</label>
-		<select name="locationId">
-			{#each data.locations as location (location.id)}
-				<option value={location.id}>{location.name}</option>
-			{/each}
-		</select>
-
-		<label for="location">Categorie</label>
-		<select name="categoryId">
-			{#each data.categories as categorie (categorie.id)}
-				<option value={categorie.id}>{categorie.name}</option>
-			{/each}
-		</select>
-
-		<button type="submit">Create event</button>
-	</form>
+        <button type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md shadow-sm transition-all">
+            Create Event
+        </button>
+    </form>
 </div>
-
 <style>
 	h1 {
 		font-size: 32px;
