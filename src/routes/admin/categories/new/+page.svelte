@@ -3,23 +3,71 @@
 	let { data } = $props();
 </script>
 
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-	<div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-		<h1 class="text-2xl font-bold text-gray-800 mb-4">Write a new Categorie</h1>
+<h1>Write a new Categorie</h1>
 
-		<form method="POST" action="?/createCategorie" use:enhance>
-			<label for="name" class="block text-gray-700">Name</label>
-			<textarea
-				placeholder="Name"
-				name="name"
-				class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-			></textarea>
+<div class="container">
+	<form method="POST" action="?/createCategorie" use:enhance>
+		<label class="label2" for="name">Name</label>
+		<textarea placeholder="Name" name="name"></textarea>
 
-			<button
-				type="submit"
-				class="w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600"
-				>Create Categorie</button
-			>
-		</form>
-	</div>
+		<button type="submit">Create Categorie</button>
+	</form>
 </div>
+
+<style>
+	h1 {
+		font-size: 32px;
+		color: #2a2b55;
+		text-align: center;
+		margin-bottom: 24px;
+		font-weight: 700;
+	}
+
+	form {
+		max-width: 500px;
+		margin: 0 auto;
+		padding: 32px;
+		background-color: #fff;
+		border-radius: 8px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+	}
+
+	label {
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 8px;
+		color: #333;
+		text-transform: uppercase;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	}
+
+	textarea {
+		padding: 12px;
+		font-size: 16px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		margin-bottom: 16px;
+	}
+
+	textarea {
+		min-height: 120px;
+	}
+
+	button {
+		background-color: #0088a9;
+		color: #fff;
+		padding: 12px 20px;
+		font-size: 16px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		font-weight: 600;
+	}
+
+	button:hover {
+		background-color: #00788c;
+	}
+</style>

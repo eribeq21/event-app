@@ -56,6 +56,7 @@
 
 		<div class="mt-4 space-y-2">
 			{#each filteredEvents as event (event.id)}
+			<img src={event.image_url} alt="" class="w-120 h-auto rounded-lg shadow-md" />			     
 				<p class="p-2 bg-gray-100 rounded-lg">
 					{event.id} - {event.title} - {new Date(event.start_date).toDateString()}
 				</p>

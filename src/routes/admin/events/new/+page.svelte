@@ -5,11 +5,19 @@
 <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
     <h1 class="text-2xl font-bold mb-4 text-gray-800">Create a new event</h1>
 
-    <form method="POST" action="?/createEvent" use:enhance class="space-y-4">
+    <form method="POST" action="?/createEvent" use:enhance class="space-y-4" enctype="multipart/form-data">
         <div>
             <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
             <input type="text" placeholder="Title" name="title"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+        </div>
+        <div>
+            <label for="image" class="block text-sm font-medium text-gray-700">Image</label>
+            <input
+				type="file"
+				name="image"
+				class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm"
+			/>
         </div>
 
         <div>
